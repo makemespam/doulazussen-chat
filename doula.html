@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitale Doulazussen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Digitale Doulazussen</h2>
+        <div id="chatbox">
+            <p class="bot-message">Welkom! Wij zijn doulazussen.nl, DigiYmke en DigiMirjam. Stel ons je vragen over zwangerschap en bevalling. 😊</p>
+        </div>
+        <input type="text" id="chatInput" placeholder="Typ een bericht...">
+        <button onclick="sendMessage()">Stuur</button>
+    </div>
+
+    <script>
+        document.getElementById("chatInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Voorkom standaard Enter-gedrag
+                sendMessage(); // Roep de functie aan om een bericht te sturen
+            }
+        });
+
+        function sendMessage() {
+            let message = document.getElementById("chatInput").value;
+            let chatbox = document.getElementById("chatbox");
+
+            if (message.trim() === "") return;
+
+            // Voeg het gebruikersbericht toe
+            chatbox.innerHTML += `<div class="message user-message"><span class="timestamp">${getTime()}</span> ${message}</div>`;
+            document.getElementById("chatInput").value = "";
+
+            // Voeg "Doulazussen is aan het typen..." toe
+            let typingIndicator = document.createElement("div");
+            typingIndicator.classList.add("typing-indicator");
+            typingIndicator.innerText = "Doulazussen is aan het typen...";
+            chatbox.appendChild(typingIndicator);
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            fetch("http://192.168.50.221:5000/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatbox.removeChild(typingIndicator); // Verwijder "is aan het typen..."
+                chatbox.innerHTML += `<div class="message bot-message">
+                    <img class="bot-avatar" src="doulazussen_profile.png" alt="Zussen">
+                    <div>
+                        <strong>Doulazussen</strong>
+                        <span class="timestamp">${getTime()}</span>
+                        <p>${formatMessage(data.response)}</p>
+                    </div>
+                </div>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            })
+            .catch(error => {
+                console.error("Fout:", error);
+                chatbox.removeChild(typingIndicator);
+            });
+        }
+
+        function formatMessage(message) {
+            // Vervang **tekst** door <strong>tekst</strong>
+            return message.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+        }
+
+        function getTime() {
+            let now = new Date();
+            return now.getHours() + ":" + String(now.getMinutes()).padStart(2, "0");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* Algemene stijlen voor Digitale Doulazussen */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #F4E9F9;
+    color: #4A235A;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #FAF3EB;
+    border: 2px solid #A569BD;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Titel stijl */
+.chat-container h2 {
+    text-align: center;
+    color: #6C3483;
+    margin: 20px 0;
+}
+
+/* Chatbox */
+#chatbox {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #F4E9F9;
+    border-bottom: 2px solid #A569BD;
+}
+
+/* Berichten */
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+/* Gebruikersbericht */
+.user-message {
+    background: #D7BDE2;
+    color: #FFFFFF;
+    align-self: flex-end;
+    text-align: right;
+    border-radius: 15px 15px 0 15px;
+    padding: 10px;
+    margin-left: auto;
+}
+
+/* Digitale Doulazussen bericht */
+.bot-message {
+    background: #E8DAEF;
+    color: #4A235A;
+    align-self: flex-start;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 15px 15px 15px 0;
+    padding: 10px;
+    margin-right: auto;
+}
+
+/* Profielfoto Digitale Doulazussen */
+.bot-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Typanimatie */
+.typing-indicator {
+    font-style: italic;
+    color: #A569BD;
+    padding: 5px;
+}
+
+/* Tijdstempel */
+.timestamp {
+    font-size: 0.8em;
+    color: #6C3483;
+    margin-left: 10px;
+}
+
+/* Input en knop */
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #8E44AD;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #6C3483;
+}
+
+/* Enter key trigger */
+input[type="text"] {
+    width: calc(100% - 12px);
+    margin-right: 5px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+.chat-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
