@@ -41,7 +41,7 @@
             chatbox.appendChild(typingIndicator);
             chatbox.scrollTop = chatbox.scrollHeight;
 
-            fetch("http://192.168.50.221:5000/chat", {
+            fetch("https://doulazussen-backend.onrender.com/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: message })
