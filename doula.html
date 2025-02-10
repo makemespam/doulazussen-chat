@@ -10,7 +10,7 @@
     <div class="chat-container">
         <h2>Digitale Doulazussen</h2>
         <div id="chatbox">
-            <p class="bot-message">Welkom! <br>Wij zijn doulazussen.nl, DigiYmke en DigiMirjam. Stel ons je vragen over zwangerschap en bevalling. <br>Bij het eerste berichtje kan het tot een minuut duren voor we reageren. 😊</p>
+            <p class="bot-message">Welkom! <br>Wij zijn doulazussen.nl, DigiYmke en DigiMirjam. De AI versie van de echte Ymke en Mirjam. Stel ons gerust je vragen over zwangerschap en bevalling. <br>Bij het eerste berichtje kan het tot een minuut duren voor we reageren. 😊</p>
         </div>
         <input type="text" id="chatInput" placeholder="Typ een bericht...">
         <button onclick="sendMessage()">Stuur</button>
@@ -24,6 +24,12 @@
             }
         });
 
+        function scrollToBottom() {
+            let chatbox = document.getElementById("chatbox");
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+
         function sendMessage() {
             let message = document.getElementById("chatInput").value;
             let chatbox = document.getElementById("chatbox");
@@ -33,6 +39,7 @@
             // Voeg het gebruikersbericht toe
             chatbox.innerHTML += `<div class="message user-message"><span class="timestamp">${getTime()}</span> ${message}</div>`;
             document.getElementById("chatInput").value = "";
+            scrollToBottom(); // Zorg ervoor dat naar beneden wordt gescrold
 
             // Voeg "Doulazussen is aan het typen..." toe
             let typingIndicator = document.createElement("div");
